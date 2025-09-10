@@ -1,0 +1,624 @@
+/* Estilos Generales */
+body {
+    font-family: 'Inter', sans-serif, system-ui, -apple-system, BlinkMacFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+    background-color: #1a1a1a; /* Negro muy oscuro para la página de inicio */
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Para centrar el contenido principal */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden; /* Previene el scroll horizontal */
+    transition: background-color 0.5s ease-in-out; /* Transición para el color de fondo */
+    position: relative; /* Importante para la posición del video de fondo */
+    z-index: 1; /* Asegura que el contenido principal esté por encima del video */
+}
+
+/* Color de fondo cuando la página del reproductor de música está activa */
+body.player-active-bg {
+    background-color: transparent; /* Fondo transparente para que el video sea el dominante */
+}
+
+/* Color de fondo cuando la página de detalles de la canción está activa */
+body.detail-active-bg {
+    background-color: #181818; /* Un gris oscuro para la página de detalles */
+}
+
+/* Estilos del Video de Fondo */
+.video-background-container {
+    position: fixed; /* Permanece fijo en el viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Detrás del contenido principal y del overlay */
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.7s ease-in-out; /* Transición para aparecer/desaparecer */
+}
+
+.video-background-container.active {
+    opacity: 1; /* Muestra el contenedor cuando está activo */
+}
+
+.video-background-container video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover; /* Asegura que el video cubra el contenedor */
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Opacidad reducida para que se vea más el fondo */
+    z-index: 1; /* Por encima del video, por debajo del contenido principal */
+}
+
+/* Estilos Generales de las Páginas */
+.page {
+    width: 100%;
+    max-width: 800px; /* Ancho máximo para el contenido principal */
+    padding: 1rem;
+    display: none; /* Todas las páginas están ocultas por defecto */
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative; /* Importante para el z-index por encima del video */
+    z-index: 2; /* Asegura que la página siempre esté por encima del overlay y el video */
+    background-color: transparent; /* Asegura que la página sea transparente para ver el video */
+}
+
+.page.active {
+    display: flex; /* Solo la página activa se muestra */
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* Estilos de la Página de Inicio (Lista de Canciones) */
+.song-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 600px; /* Ancho de la lista de canciones */
+}
+
+.song-list li {
+    background-color: #282828; /* Gris oscuro para los ítems de la lista */
+    padding: 1rem 1.5rem;
+    margin-bottom: 0.75rem;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4); /* Sombra más pronunciada */
+}
+
+.song-list li:hover {
+    background-color: #383838; /* Gris ligeramente más claro al pasar el ratón */
+    transform: translateY(-2px);
+}
+
+.song-list .song-art-list {
+    width: 50px;
+    height: 50px;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+    object-fit: cover;
+}
+
+.song-list .song-info-list h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.song-list .song-info-list p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #b3b3b3;
+}
+
+.loading-songs {
+    text-align: center;
+    color: #a0a0a0;
+    font-style: italic;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    cursor: default !important; /* Desactiva el cursor de puntero */
+}
+.loading-songs:hover {
+    background-color: transparent !important;
+    transform: none !important;
+}
+
+/* Estilo del Botón de Volver */
+.back-btn {
+    position: absolute;
+    top: 1.5rem;
+    background-color: rgba(40, 40, 40, 0.7); /* Fondo oscuro semitransparente */
+    color: #f0f0f0;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    z-index: 10;
+    transition: background-color 0.2s ease;
+}
+.back-btn:hover {
+    background-color: #282828; /* Fondo más oscuro al pasar el ratón */
+}
+.back-btn i {
+    margin-right: 0.5rem;
+}
+
+/* Posicionamiento específico para el botón de volver en la página del reproductor */
+.back-btn-player {
+    left: 1.5rem; /* Mantenemos a la izquierda */
+    right: auto; /* Desactivar posicionamiento de la derecha */
+}
+
+/* Posicionamiento específico para el botón de volver en la página de detalles (si lo mantienes a la izquierda) */
+.back-btn-detail {
+    left: 1.5rem;
+    right: auto;
+}
+
+
+/* Contenedor del Reproductor de Música */
+.music-player-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    min-height: 90vh; /* Mantener para centrar el box si es necesario */
+    padding-top: 3rem; /* Espacio para el botón de volver */
+    position: relative;
+    padding-bottom: 2rem; /* Espacio mínimo en la parte inferior */
+}
+
+.music-player-box {
+    background: rgba(0, 0, 0, 0.3); /* Ligeramente más transparente */
+    border-radius: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    overflow: hidden; /* Importante para el scroll interno */
+    width: 100%;
+    max-width: 600px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    height: auto;
+    max-height: calc(100vh - 6rem); /* Altura máxima para no chocar con los bordes */
+    min-height: fit-content;
+    backdrop-filter: blur(10px); /* Desenfoque del fondo detrás del reproductor */
+}
+
+.player-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.album-art-player {
+    width: 70px;
+    height: 70px;
+    border-radius: 0.5rem;
+    margin-right: 1.2rem;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.track-info-player {
+    flex-grow: 1;
+}
+
+.track-info-player h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 0 0.2rem 0;
+    color: #ffffff;
+}
+
+.track-info-player p {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+    margin: 0;
+}
+
+/* Contenedor principal de letras y significado */
+.lyrics-and-meaning-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+    flex-grow: 1;
+    min-height: 0;
+    overflow-y: hidden;
+}
+
+.lyrics-container {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    max-height: 10em; /* Aproximadamente 6-7 líneas de texto, ajusta según el line-height */
+    overflow-y: auto; /* Habilita scroll */
+    line-height: 1.6em; /* Altura de línea explícita */
+    font-size: 1.05rem; /* Tamaño de fuente ligeramente más grande para las letras */
+    color: #e0e0e0;
+    text-align: center;
+    scroll-behavior: smooth;
+    position: relative;
+    /* Degradado sutil para indicar más contenido arriba/abajo */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 5%, black 20%, black 80%, transparent 95%);
+    mask-image: linear-gradient(to bottom, transparent 5%, black 20%, black 80%, transparent 95%);
+    flex-shrink: 0;
+}
+
+/* Barra de desplazamiento personalizada para las letras */
+.lyrics-container::-webkit-scrollbar {
+    width: 8px;
+}
+.lyrics-container::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+.lyrics-container::-webkit-scrollbar-thumb {
+    background: rgba(112, 112, 112, 0.5);
+    border-radius: 10px;
+}
+.lyrics-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(112, 112, 112, 0.8);
+}
+
+/* Contenedor del título y botón del significado */
+.meaning-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: -0.5rem;
+}
+
+.meaning-section-header h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.05rem;
+    text-align: center;
+}
+
+/* Estilos para el contenedor del significado */
+.song-meaning-container {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 0;
+    border-radius: 0.5rem;
+    line-height: 1.5;
+    font-size: 0.88rem;
+    color: #d0d0d0;
+    overflow-y: auto;
+    border-top: none;
+
+    max-height: 0;
+    min-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s ease-out, opacity 0.3s ease-out, padding 0.5s ease-out, border-top 0.5s ease-out;
+}
+
+.song-meaning-container.expanded {
+    max-height: 200px;
+    min-height: 8em;
+    padding: 1rem;
+    opacity: 1;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* Asegura que la barra de desplazamiento sea similar a la de las letras */
+.song-meaning-container::-webkit-scrollbar {
+    width: 8px;
+}
+.song-meaning-container::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+.song-meaning-container::-webkit-scrollbar-thumb {
+    background: rgba(112, 112, 112, 0.5);
+    border-radius: 10px;
+}
+.song-meaning-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(112, 112, 112, 0.8);
+}
+
+/* Nuevo estilo para el botón de despliegue del significado */
+.toggle-meaning-btn {
+    background: none;
+    border: none;
+    color: #c0c0c0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-meaning-btn:hover {
+    color: #ffffff;
+}
+
+.toggle-meaning-btn i {
+    transition: transform 0.3s ease-out;
+}
+
+.toggle-meaning-btn.expanded i {
+    transform: rotate(180deg);
+}
+
+
+.player-controls {
+    width: 100%;
+    margin-top: 1rem;
+    flex-shrink: 0;
+}
+
+.progress-section-player {
+    margin-bottom: 0.8rem;
+}
+
+.progress-bar-container-player {
+    background-color: #303030;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 10px;
+    width: 100%;
+}
+
+.progress-bar-player {
+    background-color: #c0c0c0; /* Un gris más visible para la barra de progreso */
+    width: 0%;
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.1s linear;
+}
+
+.time-display-player {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: #c0c0c0;
+    margin-top: 0.6rem;
+}
+
+.main-controls-player {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.control-btn-player {
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.1s ease;
+    padding: 0.5rem;
+}
+.control-btn-player:hover {
+    color: #a0a0a0;
+    transform: scale(1.1);
+}
+.control-btn-player.play-pause-player {
+    font-size: 2.8rem;
+    color: #ffffff;
+}
+.control-btn-player.play-pause-player:hover {
+    color: #e0e0e0;
+}
+/* Colores neutrales para las características activas (sin morado) */
+.control-btn-player.active-feature,
+.control-btn-player.active-feature-one {
+    color: #d8c257 !important; /* Un tono dorado/amarillo sutil, distintivo pero no vibrante */
+}
+
+
+.secondary-controls-player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.5rem;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+.control-btn-player.small-icon {
+    font-size: 1.4rem;
+}
+
+.volume-control-player, .playback-speed-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.volume-icon-player, .speed-icon {
+    color: #b0b0b0;
+    font-size: 1rem;
+}
+
+.volume-slider-player, .speed-slider {
+    width: 100px;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #404040;
+    border-radius: 4px;
+    outline: none;
+    opacity: 0.9;
+    transition: opacity .2s;
+    margin: 0;
+}
+.volume-slider-player:hover, .speed-slider:hover {
+    opacity: 1;
+}
+.volume-slider-player::-webkit-slider-thumb, .speed-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #c0c0c0;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.volume-slider-player::-moz-range-thumb, .speed-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #c0c0c0;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+#currentSpeedDisplay {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+    min-width: 40px;
+    text-align: left;
+}
+
+
+.footer-credit {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #707070;
+    margin-top: 1.5rem;
+}
+
+/* Estilos para el Resaltado de Letras */
+.lyric-line {
+    color: rgba(255, 255, 255, 0.4);
+    transition: color 0.3s ease, font-weight 0.3s ease, transform 0.1s ease; /* Añadimos transform para un sutil efecto */
+    display: block;
+    margin-bottom: 0.2em;
+    text-align: center;
+}
+
+.lyric-line.highlight {
+    color: #F8F8F8;
+    font-weight: 700; /* Un poco más de grosor para el highlight */
+    transform: scale(1.02); /* Ligerísimo aumento de tamaño para llamar la atención */
+}
+
+/* --- NUEVOS ESTILOS PARA EL SPLASH SCREEN --- */
+.song-splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    pointer-events: none;
+}
+
+.song-splash.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.song-splash h2 {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.song-splash p {
+    font-size: 1.8rem;
+    margin-top: 0;
+    font-weight: 500;
+}
+
+.song-splash .splash-credit {
+    position: absolute;
+    bottom: 2rem;
+    font-size: 1rem;
+    color: #bbb;
+    width: 100%;
+    text-align: center;
+}
+
+/* Media Query para pantallas pequeñas (ajustes) */
+@media (max-width: 799px) {
+    .music-player-box {
+        padding: 0.8rem;
+        max-height: calc(100vh - 4rem);
+    }
+
+    .song-meaning-container.expanded {
+        max-height: 150px;
+    }
+
+    .toggle-meaning-btn {
+        margin-top: -0.2rem;
+        font-size: 1rem;
+    }
+
+    .song-splash h2 {
+        font-size: 2.5rem;
+    }
+    .song-splash p {
+        font-size: 1.3rem;
+    }
+    .song-splash .splash-credit {
+        font-size: 0.8rem;
+        bottom: 1rem;
+        text-align: center;
+    }
+
+    /* Ajuste para el botón de volver en móviles para que no quede encima del título */
+    .back-btn-player {
+        top: 0.8rem;
+        left: 0.8rem; /* Vuelve a la izquierda */
+        right: auto; /* Desactivar posicionamiento de la derecha */
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+}
