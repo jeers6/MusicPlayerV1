@@ -204,8 +204,8 @@ let songs = [
         album: "Parachutes",
         albumArtUrl: "https://i.scdn.co/image/ab67616d0000b2739164bafe9aaa168d93f4816a",
         audioSrc: "https://www.dropbox.com/scl/fi/qrdq8pr8blh7xy2p752f4/Yellow-Audio.mp3?rlkey=1iyqyz93a1ov217h6tan18lit&raw=1",
-        audioKaraokeSrc: "https://www.dropbox.com/scl/fi/adcsdtx0lshzmyv86w6e0/Yellow-Pista.mp3?rlkey=6o77546j0cr61hmh08jikznww&raw=1", // <--- RUTA DEL KARAOKE AQUÍ
-        videoBgSrc: "https://www.dropbox.com/scl/fi/hv6tiokg3jf5ndlo31wk4/Yellow-Fondo.mp4?rlkey=53wdga2zo5z2ce39873ew4j3j&raw=1",
+        audioKaraokeSrc: "https://www.dropbox.com/scl/fi/adcsdtx0lshzmyv86w6e0/Yellow-Pista.mp3?rlkey=6o77546j0cr61hmh08jikznww&raw=1",
+        videoBgSrc: "https://www.dropbox.com/scl/fi/8s9hy57um6pl2p443pnlx/Yellow-Fondo.mp4?rlkey=qqv9qyv4t796y0wugkzjpd0r4&raw=1",
         lyrics: [
             { time: 35, text: "Look at the stars" },
             { time: 38, text: "Look how they shine for you" },
@@ -727,3 +727,4 @@ audioPlayer.addEventListener('ended', () => {
         nextTrack();
     }
 });
+
