@@ -204,7 +204,7 @@ let songs = [
         album: "Parachutes",
         albumArtUrl: "https://i.scdn.co/image/ab67616d0000b2739164bafe9aaa168d93f4816a",
         audioSrc: "https://www.dropbox.com/scl/fi/qrdq8pr8blh7xy2p752f4/Yellow-Audio.mp3?rlkey=1iyqyz93a1ov217h6tan18lit&raw=1",
-        audioKaraokeSrc: "https://www.dropbox.com/scl/fi/adcsdtx0lshzmyv86w6e0/Yellow-Pista.mp3?rlkey=6o77546j0cr61hmh08jikznww&raw=1",
+        audioKaraokeSrc: "https://www.dropbox.com/scl/fi/adcsdtx0lshzmyv86w6e0/Yellow-Pista.mp3?rlkey=6o77546j0cr61hmh08jikznww&raw=1", // <--- RUTA DEL KARAOKE AQUÍ
         videoBgSrc: "https://www.dropbox.com/scl/fi/8s9hy57um6pl2p443pnlx/Yellow-Fondo.mp4?rlkey=qqv9qyv4t796y0wugkzjpd0r4&raw=1",
         lyrics: [
             { time: 35, text: "Look at the stars" },
@@ -249,6 +249,50 @@ let songs = [
             { time: 259, text: "And all the things that you do" },
         ],
         meaning: "Contigo siento que todo tiene más luz, como si cada detalle tuyo brillara de una manera única. Eres diferente a todas las personas que conocí, y eso me hace feliz, porque contigo siento que estoy donde realmente quiero estar. A veces pienso en lo que viene, en el día en que podamos estar juntos de verdad, y esa ilusión me llena el corazón. Me hace soñar con un futuro en el que no solo estemos uno al lado del otro, sino que cada paso que demos esté iluminado por lo que sentimos. Porque como en la canción, todo brilla cuando se trata de ti."
+    },
+    {
+        id: 5,
+        title: "Lovesong",
+        artist: "The Cure",
+        album: "Disintegration (Deluxe Edition)",
+        albumArtUrl: "https://i.scdn.co/image/ab67616d0000b2735eaaa770d39591fd91b2b03b",
+        audioSrc: "https://www.dropbox.com/scl/fi/0jd9vtcy4g10118jaj0um/Lovesong-Audio.mp3?rlkey=dot0bxt0m7xp5c6xniq8uu5k7&raw=1",
+        audioKaraokeSrc: "https://www.dropbox.com/scl/fi/l87quvnjahdxdqtoe05wx/Lovesong-Instrumental.mp3?rlkey=6hd235jm1d6p6r77a7b9aixqn&raw=1",
+        videoBgSrc: "https://www.dropbox.com/scl/fi/a4i6zor255ojjvzc835c9/Lovesong-Fondo.mp4?rlkey=j2exqc24h5i7435rrfxy1bfpu&raw=1",
+        lyrics: [
+            { time: 1, text: "♫ ♫ ♫ ♫ ♫" },
+            { time: 29, text: "Whenever I'm alone with you" },
+            { time: 36, text: "You make me feel like I am home again" },
+            { time: 43, text: "Whenever I'm alone with you" },
+            { time: 49.7, text: "You make me feel like I am whole again" },
+            { time: 56.2, text: "♫ ♫ ♫ ♫ ♫" },
+            { time: 69.5, text: "Whenever I'm alone with you" },
+            { time: 77, text: "You make me feel like I am young again" },
+            { time: 83, text: "Whenever I'm alone with you" },
+            { time: 90.7, text: "You make me feel like I am fun again" },
+            { time: 97, text: "However far away" },
+            { time: 101.5, text: "I will always love you" },
+            { time: 104.5, text: "However long I stay" },
+            { time: 108, text: "I will always love you" },
+            { time: 111.2, text: "Whatever words I say" },
+            { time: 115, text: "I will always love you" },
+            { time: 118, text: "I will always love you" },
+            { time: 121, text: "♫ ♫ ♫ ♫ ♫" },
+            { time: 131.5, text: "(Fly me to the Moon)" },
+            { time: 134.5, text: "♫ ♫ ♫ ♫ ♫" },
+            { time: 148.5, text: "Whenever I'm alone with you" },
+            { time: 155.5, text: "You make me feel like I am free again" },
+            { time: 162, text: "Whenever I'm alone with you" },
+            { time: 169.5, text: "You make me feel like I am clean again" },
+            { time: 176, text: "However far away" },
+            { time: 180, text: "I will always love you" },
+            { time: 183, text: "However long I stay" },
+            { time: 187, text: "I will always love you" },
+            { time: 190, text: "Whatever words I say" },
+            { time: 193.5, text: "I will always love you" },
+            { time: 197, text: "I will always love you" },
+        ],
+        meaning: "Me haces sentir algo que no había sentido con nadie, porque me haces feliz de una manera tan simple y real que me encanta cada día. Esta canción dice que estar con alguien te hace sentir en casa, libre, joven y hasta divertido otra vez, y eso mismo es lo que tú me haces sentir a mí. Por eso sé que, sin importar la distancia o el tiempo que pase, siempre te amaré, porque eres la razón por la que me siento feliz cada día."
     }
 ];
 let currentSongIndex = 0;
@@ -727,4 +771,3 @@ audioPlayer.addEventListener('ended', () => {
         nextTrack();
     }
 });
-
