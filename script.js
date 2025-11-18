@@ -389,7 +389,7 @@ let songs = [
             { time: 182, text: "Oh, this life I choose" },
             { time: 186, text: "♫ ♫ ♫ ♫ ♫" },
         ],
-        meaning: "Contigo siento que el verdadero amor no es algo que se busca, sino algo que se espera con paciencia y tiempo, porque vale la pena. Me gusta la canción porque habla de que el amor real sigue ahí incluso cuando parece frágil, y yo siento eso contigo: no importa cuánto tiempo pase ni lo que tengamos que atravesar, lo único que quiero es que no te vayas, porque eres la persona que le da sentido a mi espera y a mis sueños de futuro."
+        meaning: "I Could Die For You es una frase muy complicada de usar y dificil de pensar pero créeme que aunque no estoy seguro de todo lo que me pase con relación a esto, haría todo por ti, y eso es lo que verdaderamente quiero que exprese la canción por ti. Me haces sentir tan querido y acompañado que quiero que te quedes junto a mi en todas nuestras experiencias que podremos tener, quiero pasear contigo pero no solo en nuestras futuras salidas si no también en el tiempo que quiero que pasemos juntos, en nuestras vivencias y todo lo que deseo que pasemos juntos, quiero que estés conmigo siempre."
     }
 ];
 let currentSongIndex = 0;
